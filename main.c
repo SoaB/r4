@@ -1,3 +1,4 @@
+#include "particle.h"
 #include "particleSystem.h"
 #include "rnd.h"
 #include "sgi.h"
@@ -12,14 +13,16 @@ void update_draw(PtlSystem *p, sgi_Image *d) {
   for (; current != NULL; current = current->next) {
     current->Update(current);
     if (!current->IsDead(current))
-      d->Draw(d, (int)(current->location.x), (int)(current->location.y), 0);
+      d->Draw(d, (int)(current->location.x), (int)(current->location.y),
+              current->dir);
   }
 }
 int main(int argc, char *argv[]) {
   PtlSystem *PtSys = NewPtlSystem(400, 300);
+  PtSys->Add(PtSys);
   rnd_Seed(time(NULL), 33);
   sgi_Init(800, 600, "Particle");
-  sgi_Image *mvr = NewSgiImage("dot.bmp");
+  sgi_Image *mvr = NewSgiImage("ship.bmp");
   while (!sgi_Done()) {
     sgi_Clear(RGB_Black);
     PtSys->Add(PtSys);
