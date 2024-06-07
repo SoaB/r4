@@ -68,10 +68,10 @@ PtlSystem *NewPtlSystem(float x, float y) {
   ptlsys->x = x;
   ptlsys->y = y;
   ptlsys->Head = NULL;
-  ptlsys->Add = &_add_particle;
-  ptlsys->Len = &_length_of_list;
-  ptlsys->Delete = &_delete_particle;
-  ptlsys->Destroy = &_destroy_PtrSystem;
+  ptlsys->Add = _add_particle;
+  ptlsys->Len = _length_of_list;
+  ptlsys->Delete = _delete_particle;
+  ptlsys->Destroy = _destroy_PtrSystem;
   return ptlsys;
 }
 

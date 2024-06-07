@@ -43,9 +43,9 @@ Particle *NewParticle(float x, float y) {
   pl->velocity = V2D_Set(rnd_Fmn(-1, 1), rnd_Fmn(-2, 0));
   pl->lifespan = 255.0;
   pl->dir = 0;
-  pl->Update = &_update_particle;
-  pl->Destroy = &_destroy_particle;
-  pl->IsDead = &_is_dead_particle;
+  pl->Update = _update_particle;
+  pl->Destroy = _destroy_particle;
+  pl->IsDead = _is_dead_particle;
   pl->next = NULL;
   return pl;
 }
