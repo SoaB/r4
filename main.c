@@ -18,20 +18,28 @@ void update_draw(PtlSystem *p, SB_Image *d) {
   }
 }
 int main(int argc, char *argv[]) {
-  PtlSystem *PtSys = NewPtlSystem(400, 300);
-  PtSys->Add(PtSys);
+	int i;
   rnd_Seed(time(NULL), 33);
+  PtlSystem *PtSys[10];
+  for(i=0;i<10;i++) {
+	PtSys[i] = NewPtlSystem(rnd_R32n(0,800),rnd_R32n(0,600));
+	PtSys[i]->Add(PtSys[i]);
+  }
   SB_Init(800, 600, "Particle");
   SB_Image *mvr = NewSBImage("ship.bmp");
   while (!SB_Done()) {
     SB_Clear(RGB_Black);
-    PtSys->Add(PtSys);
-    update_draw(PtSys, mvr);
-    PtSys->Delete(PtSys);
+    for(i=0;i<10;i++) {
+		PtSys[i]->Add(PtSys[i]);
+		update_draw(PtSys[i], mvr);
+		PtSys[i]->Delete(PtSys[i]);
+    }
     SB_Update();
     SB_Delay(16);
   }
-  PtSys->Destroy(PtSys);
+  for(i=0;i<10;i++) {
+	PtSys[i]->Destroy(PtSys[i]);
+  }
   mvr->Destroy(mvr);
   SB_Fini();
   return 0;
